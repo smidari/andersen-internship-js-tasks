@@ -58,3 +58,22 @@ const obj2 = objectCreate(obj, {
 });
 
 console.log(obj2); // { p: 20, k: 30, __proto__: { a: 1 } }
+
+console.log("====== 3 ======");
+// Написать свою реализацию new в виде функции myNew.
+function myNew(Constructor, ...props) {
+  const obj = Object.create(Constructor.prototype);
+  Constructor.apply(obj, props);
+  return obj;
+}
+function F() {
+  this.a = 10;
+}
+
+F.prototype.foo = function () {
+  return this.a;
+};
+
+const a = myNew(F);
+console.log(a); // { a: 10, __proto__: { foo, constructor } }
+console.log(a.foo()); // 10
