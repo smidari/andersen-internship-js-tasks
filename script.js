@@ -1,6 +1,6 @@
 // Реализовать функцию throttleTime
 function myFunc1() {
-  console.log('test')
+  console.log("test");
 }
 const throttleFunc = throttleTime(myFunc1, 500);
 
@@ -13,28 +13,29 @@ function throttleTime(func, time) {
   return function () {
     let previousCall = this.lastCall;
     this.lastCall = Date.now();
-    if (previousCall === undefined // function is being called for the first time
-      || (this.lastCall - previousCall) > time) { // throttle time has elapsed
+    if (
+      previousCall === undefined || // function is being called for the first time
+      this.lastCall - previousCall > time
+    ) {
+      // throttle time has elapsed
       func();
     }
-  }
+  };
 }
 
 // Реализовать функцию debounceTime
 function myFunc() {
-  console.log('test debounceTime');
+  console.log("test debounceTime");
 }
-const debounceFunc = debounceTime(myFunc, 500);
+const debounceFunc = debounceTime(myFunc, 1000);
 debounceFunc();
 
 function debounceTime(func, time) {
+  let timerId;
   return function () {
-    let previousCall = this.lastCall;
-    this.lastCall = Date.now();
-    if (previousCall && ((this.lastCall - previousCall) <= time)) {
-      clearTimeout(this.lastCallTimer);
+    if (timerId) {
+      clearTimeout(timerId);
     }
-    this.lastCallTimer = setTimeout(() => func(), time);
-  }
+    timerId = setTimeout(() => func(), time);
+  };
 }
-
