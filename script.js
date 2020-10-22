@@ -1,17 +1,15 @@
 console.log("===== 1 =====");
 function func(str) {
   const arr = str.split(".");
-  const obj = {};
-  let lastObj = obj;
-  for(let i = 0; i < arr.length; i++){
-    if(i === arr.length - 1){
-      lastObj[arr[i]] = null;
-    }else{
-      lastObj[arr[i]] = {};
-      lastObj = lastObj[arr[i]];
+  const result = arr.reduceRight((acc, key) => {
+    if (key === arr[arr.length - 1]) {
+      acc[key] = null;
+      return acc;
+    } else {
+      return { [key]: acc };
     }
-  }
-  return obj;
+  }, {});
+  return result;
 }
 
 console.log(func("a.b.c.d"));
