@@ -3,23 +3,21 @@ function myFunc1() {
   console.log("test");
 }
 const throttleFunc = throttleTime(myFunc1, 500);
-
-throttleFunc();
 throttleFunc();
 setTimeout(() => throttleFunc(), 500);
 setTimeout(() => throttleFunc(), 600);
 
-function throttleTime(func, time) {
+function throttleTime(func, ms) {
+  let isThrottled = false;
   return function () {
-    let previousCall = this.lastCall;
-    this.lastCall = Date.now();
-    if (
-      previousCall === undefined || // function is being called for the first time
-      this.lastCall - previousCall > time
-    ) {
-      // throttle time has elapsed
-      func();
+    if (isThrottled) {
+      return;
     }
+    func();
+    isThrottled = true;
+    setTimeout(function () {
+      isThrottled = false;
+    }, ms);
   };
 }
 
@@ -27,7 +25,7 @@ function throttleTime(func, time) {
 function myFunc() {
   console.log("test debounceTime");
 }
-const debounceFunc = debounceTime(myFunc, 1000);
+const debounceFunc = debounceTime(myFunc, 5000);
 debounceFunc();
 
 function debounceTime(func, time) {
