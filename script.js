@@ -74,3 +74,30 @@ function sum(a) {
 console.log(sum(1)(2)(3)()); // 6
 console.log(sum(1)(2)(3)(4) + 1); // 11
 console.log(sum(1)(2)(3)(4)(5) + 1); // 16
+
+console.log("===== 6 =====");
+// Написать  функцию prop, в которую передается ключ для получение значение по этому ключу.
+const tweeps = [
+  { name: "Peter", age: 20 },
+  { name: "Mary", age: 32 },
+];
+
+const prop = (key) => (item) => item[key];
+
+const str = "Mentioned by " + tweeps.map(prop("name")).join(", ");
+console.log(str); // 'Mentioned by Peter, Mary'
+
+const agesStr = `They are ${tweeps.map(prop("age")).join(",")}`;
+console.log(agesStr); // ‘They are 20, 32’
+
+console.log("===== 7 =====");
+// Написать функцию compose, add, mul. add и mul - каррированные функции (только на 2 вызова).
+// функция compose принимает неограниченное кол-во функций и применяет эти функции в обратном порядке.
+
+const compose = (...fsn) => (x) => fsn.reduceRight((v, f) => f(v), x);
+const mul = (x) => (y) => x * y;
+const add = (x) => (y) => x + y;
+
+const composed = compose(mul(2), add(5), add(2));
+console.log(composed(3)); // 20
+console.log([1, 2, 6].map(composed)); // [16, 18, 26]
