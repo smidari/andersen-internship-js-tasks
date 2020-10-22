@@ -30,38 +30,31 @@ console.log(diff([1, 2, 3, 7, 9], [4, 5, 7, 2, 1, 5])); // [3, 9]
 console.log(diff([4, 5, 7, 2, 1, 5], [1, 2, 3, 7, 9])); // [4, 5]
 
 console.log("===== 3 =====");
-// // !!!!!!!!!( исправить не ищет третье совпадение)
-// // Анаграммы. Написать функцию anagrams(array), которая принимает массив слов и ищет анаграммы
-// const input = [
-//   "вертикаль",
-//   "кильватер",
-//   "апельсин",
-//   "спаниель",
-//   "австралопитек",
-//   "ватерполистка",
-//   "кластер",
-//   "сталкер",
-//   "стрелка",
-// ];
-//
-// function anagrams(array) {
-//   const anagrams = [];
-//   array.forEach((item) => {
-//     let itemArr = item.split("");
-//     array.forEach((el) => {
-//       if (el !== item && !anagrams.flat().includes(el)) {
-//         let elArr = el.split("");
-//         let diffArr = diff(itemArr, elArr);
-//         if (diffArr.length === 0) {
-//           anagrams.push([itemArr.join(""), elArr.join("")]);
-//         }
-//       }
-//     });
-//   });
-//
-//   return anagrams;
-// }
+// Анаграммы. Написать функцию anagrams(array), которая принимает массив слов и ищет анаграммы
+const input = [
+  "вертикаль",
+  "кильватер",
+  "апельсин",
+  "спаниель",
+  "австралопитек",
+  "ватерполистка",
+  "кластер",
+  "сталкер",
+  "стрелка",
+];
 
+function anagrams(arr) {
+  let obj = {};
+  arr.forEach((item) => {
+    let itemForArr = item.split("").sort().join("");
+    if (obj.hasOwnProperty(itemForArr)) {
+      obj[itemForArr] = [...obj[itemForArr], item];
+    } else {
+      obj[itemForArr] = [item];
+    }
+  });
+  return Object.values(obj);
+}
 console.log(anagrams(input));
 
 console.log("===== 4 =====");
