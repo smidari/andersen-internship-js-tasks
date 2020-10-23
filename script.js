@@ -9,9 +9,8 @@ function Person(name) {
 function Man(name, facialHair) {
   const superA = Person(name);
   superA.facialHair = facialHair;
-
   superA.getName = function () {
-    return `Name: ${superA.name}`;
+    return 'Name:' + Person(name).getName.call(superA);
   };
 
   superA.getFacialHair = function () {
