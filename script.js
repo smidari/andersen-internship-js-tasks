@@ -21,7 +21,7 @@ Man.prototype.getFacialHair = function () {
   return this.facialHair;
 };
 Man.prototype.getName = function () {
-  return "Name: " + this.name;
+  return "Name: "  + Person.prototype.getName.call(this);
 };
 
 const person = new Person("somebody");
