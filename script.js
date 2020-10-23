@@ -12,16 +12,17 @@ Person.prototype.getName = function () {
 function Man(name, facialHair) {
   Person.call(this, name);
   this.facialHair = facialHair;
-  this.getFacialHair = function () {
-    return this.facialHair;
-  };
-  this.getName = function () {
-    return "Name: " + this.name;
-  };
 }
 
 Man.prototype = Object.create(Person.prototype);
 Man.prototype.constructor = Man;
+
+Man.prototype.getFacialHair = function () {
+  return this.facialHair;
+};
+Man.prototype.getName = function () {
+  return "Name: " + this.name;
+};
 
 const person = new Person("somebody");
 console.log(person.getName()); // somebody
