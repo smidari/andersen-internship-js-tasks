@@ -5,9 +5,8 @@ function func(str) {
     if (key === arr[arr.length - 1]) {
       acc[key] = null;
       return acc;
-    } else {
-      return { [key]: acc };
     }
+    return { [key]: acc };
   }, {});
   return result;
 }
@@ -44,15 +43,13 @@ const input = [
 ];
 
 function anagrams(arr) {
-  let obj = {};
-  arr.forEach((item) => {
+  let obj = arr.reduce((acc, item) => {
     let itemForArr = item.split("").sort().join("");
-    if (obj.hasOwnProperty(itemForArr)) {
-      obj[itemForArr] = [...obj[itemForArr], item];
-    } else {
-      obj[itemForArr] = [item];
-    }
-  });
+    acc.hasOwnProperty(itemForArr)
+      ? (acc[itemForArr] = [...acc[itemForArr], item])
+      : (acc[itemForArr] = [item]);
+    return acc;
+  }, {});
   return Object.values(obj);
 }
 console.log(anagrams(input));
