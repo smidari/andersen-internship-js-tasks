@@ -9,10 +9,10 @@ function Person(name) {
 function Man(name, facialHair) {
   const superA = Person(name);
   superA.facialHair = facialHair;
+  const oldGetName = superA.getName;
   superA.getName = function () {
-    return 'Name:' + Person(name).getName.call(superA);
+    return "Name:" + oldGetName();
   };
-
   superA.getFacialHair = function () {
     return superA.facialHair;
   };
@@ -20,9 +20,9 @@ function Man(name, facialHair) {
   return superA;
 }
 
-const person = Person('somebody');
+const person = Person("somebody");
 console.log(person.getName()); // somebody
 
-const man = Man('Viktor', true);
+const man = Man("Viktor", true);
 console.log(man.getName()); // Name: Viktor
 console.log(man.getFacialHair()); // true
