@@ -45,9 +45,9 @@ const input = [
 function anagrams(arr) {
   let obj = arr.reduce((acc, item) => {
     let itemForArr = item.split("").sort().join("");
-    acc.hasOwnProperty(itemForArr)
-      ? (acc[itemForArr] = [...acc[itemForArr], item])
-      : (acc[itemForArr] = [item]);
+    acc[itemForArr] = acc.hasOwnProperty(itemForArr)
+      ? [...acc[itemForArr], item]
+      : [item];
     return acc;
   }, {});
   return Object.values(obj);
